@@ -335,11 +335,11 @@ def getTree(request,repo):
 	client.cd(repo+'/Types')
 	if request.method != 'OPTIONS':
 		# retrieve information of the selected node
-		client.selectAttr(['.:TypeName','FILE','Path'],'ParentID='+request.GET.getlist('node')[0])
+		client.selectAttr(['.:TypeName','FILE','Path','VisibleAttrs'],'ParentID='+request.GET.getlist('node')[0])
 		# process information to create the tree structure
 		while not client.eot():
 			entry=client.getSelectAttrEntry()
-			resultado.append({'text':entry[0],'id':entry[1],'path':entry[2],'leaf':False})
+			resultado.append({'text':entry[0],'id':entry[1],'path':entry[2],'leaf':False, 'visibleAttrs':entry[3]})
 		# check if the selected node is a leaf to mark it as that
 		for i in range(len(resultado)):
 			client.selectAttr(['.:TypeName','FILE'],'ParentID='+resultado[i]['id'])
