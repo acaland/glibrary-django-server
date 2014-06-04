@@ -5,6 +5,7 @@ import datetime, os
 import httplib, urlparse, urllib
 import mdclient, mdinterface, json
 import MySQLdb
+import datetools
 #import sys, os, time, cgi, urllib, urlparse
 #from M2Crypto import m2urllib2 
 #from M2Crypto import m2, SSL, Engine
@@ -606,6 +607,7 @@ def getLinks2(request,repo,id):
 def download(request,link):
 	#link = "https://infn-se-01.ct.pi2s2.it/dpm/ct.pi2s2.it/home/cometa/deroberto/busta23/001_Il_Rifugio_fronte.pdf"
 	#print "sono all'inizio"
+	print "COOKIES: ", request.COOKIES
 	if link.startswith("eunode4"):
 		proxy = '/tmp/euchina_proxy'
 		robot_dn = '/C=IT/O=INFN/OU=Robot/L=COMETA/CN=Robot: Digital Repository of China Relics - Roberto Barbera'
@@ -826,13 +828,13 @@ def saveMetadata(request, repo, path):
 		for k, v in request.POST.iterlists():
 			results[k] = v[0].encode()
 		results['SubmissionDate'] = str(datetime.datetime.now())[:16]
-		results['Thumb'] = 1
+		results['Thumb'] = 0
 		surl = results['Replica']
 		results.pop('Replica', None)
 		print results.keys()
 		print results.values()
 
-		client=mdclient.MDClient('glibrary.ct.infn.it',8822,'dchrp','Dch-rp2014')
+		client=mdclient.MDClient('glibrary.ct.infn.it',8822,'glibraryadmin','r3p0@dm1N')
 		entry_id = client.sequenceNext('/' + repo + '/Entries/id')
 		client.addEntry('/' +  repo + '/' + path + '/' + entry_id, results.keys(), results.values())
 		#c['cid'] = cid 
@@ -852,4 +854,11 @@ def print_env(request):
 	print request.META
 	return HttpResponse(request.META)
 
+def convert_time(request,time):
+	print type(time), time
+	return HttpResponse(datetools.getDateFromTimeIndex(int(time)))	
+
+def retrieve_index(request, date):
+	print date
+	return HttpResponse(datetools.getTimeIndexFromDate(date))
  

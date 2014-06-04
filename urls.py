@@ -4,6 +4,8 @@ from gltest.views import *
 
 urlpatterns = patterns('',
     (r'^time/$', current_datetime),
+    (r'^convertTime/(?P<time>[0-9]+)/$', convert_time),
+    (r'^retrieveIndex/(?P<date>[0-9\-]+)/$', retrieve_index),
     (r'^env/$', print_env),
 	(r'^glib/(?P<directory>[a-zA-Z0-9/]+)/$', getData),
 	(r'^getTree/$', get_tree),
