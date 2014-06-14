@@ -592,6 +592,8 @@ def getLinks2(request,repo,id):
 				resultado.append({'link': '<a href="http://glibrary.ct.infn.it/django/download/'+downLink+'" TARGET="_blank">Download</a>','lat':'39.970806','lng':'116.411133','name':'BEIJING','enabled':enabled})
 			elif downLink.startswith("earth.eo.esa.int"):
 				resultado.append({'link': '<a href="http://'+downLink+'" TARGET="_blank">Download</a>','lat':'41.900233','lng':'12.683287','name':'ESA','enabled':enabled})
+			else:
+				resultado.append({'link': '<a href="http://'+downLink+'" TARGET="_blank">Download</a>','lat':'37.4907111','lng':'15.0772719','name':'INFN','enabled':enabled})
 	#print "resultado:", resultado
 	# creates the jsonData structure and the response that will be returned
 	jsonData= json.dumps(resultado)
