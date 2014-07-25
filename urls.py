@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 	(r'^links/(?P<repo>[a-zA-Z0-9/]+)/(?P<id>[0-9]+)/$',getLinks),
 	(r'^links2/(?P<repo>[a-zA-Z0-9/]+)/(?P<id>[0-9]+)/$',getLinks2),
 	(r'^columnas/(?P<repo>[a-zA-Z0-9/]+)/$',columnas),
-    (r'^download/(?P<link>[a-zA-Z0-9/.:_-]+)/$',download),
+    (r'^download/(?P<link>[a-zA-Z0-9\+/.:_-]+)/$',download),
 	(r'^addEntry/(?P<repo>[a-zA-Z0-9/_-]+)/(?P<type>[a-zA-Z0-9/_-]+)/$', addEntry),
 	(r'^saveMetadata/(?P<repo>[a-zA-Z0-9_-]+)/(?P<path>[a-zA-Z0-9/_-]+)/$', saveMetadata)
 )
